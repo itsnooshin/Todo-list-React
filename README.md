@@ -4,15 +4,15 @@
 
 <div align="center">
   <h3>
-    <a href="https://catherineisonline.github.io/rest-countries/" color="white">
+    <a href="#" color="white">
       Live
     </a>
     <span> | </span>
-    <a href="https://www.frontendmentor.io/solutions/rest-countries-api-with-color-theme-switcher-SySqXmn49">
+    <a href="#">
       Solution
     </a>
    <span> | </span>
-    <a href="https://www.frontendmentor.io/challenges/rest-countries-api-with-color-theme-switcher-5cacc469fec04111f7b848ca">
+    <a href="#">
       Challenge
     </a>
   </h3>
