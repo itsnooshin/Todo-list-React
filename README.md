@@ -3,8 +3,6 @@
 
 <center>
 
-
-
 # React To do App
 
 </center>
@@ -13,30 +11,13 @@
 
 ### [Live Demo](https://catherineisonline.github.io/rest-countries/) | [My Solution](https://www.frontendmentor.io/solutions/rest-countries-api-with-color-theme-switcher-SySqXmn49) | [Challenge Details](https://www.frontendmentor.io/challenges/rest-countries-api-with-color-theme-switcher-5cacc469fec04111f7b848ca)
 
-
-
-
 </center>
 
 
 
-
-
-<br>
-<br>
-<br>
-
-
-# React To do List 
+# About This project
  
 The Todo App Challenge is an interactive web application designed to help users manage their tasks efficiently. This project focuses on replicating a given design while implementing key features and functionalities. The challenge encourages me to practice and demonstrate my frontend development skills.
-
-
-
-
-<!-- ![](./src/assets/bg-desktop-dark.jpg) -->
-
-
 
 
 ## Functionality
