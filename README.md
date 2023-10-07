@@ -1,17 +1,28 @@
 ![](./src/assets/design/desktop-design-dark.jpg)
 
+<h1 align="center">React To do App</h1>
 
-<center>
-
-# React To do App
-
-</center>
-
-<center>
-
-### [Live Demo](https://catherineisonline.github.io/rest-countries/) | [My Solution](https://www.frontendmentor.io/solutions/rest-countries-api-with-color-theme-switcher-SySqXmn49) | [Challenge Details](https://www.frontendmentor.io/challenges/rest-countries-api-with-color-theme-switcher-5cacc469fec04111f7b848ca)
-
-</center>
+<div align="center">
+  <h3>
+    <a href="https://catherineisonline.github.io/rest-countries/" color="white">
+      Live
+    </a>
+    <span> | </span>
+    <a href="https://www.frontendmentor.io/solutions/rest-countries-api-with-color-theme-switcher-SySqXmn49">
+      Solution
+    </a>
+   <span> | </span>
+    <a href="https://www.frontendmentor.io/challenges/rest-countries-api-with-color-theme-switcher-5cacc469fec04111f7b848ca">
+      Challenge
+    </a>
+  </h3>
+</div>
+<div align="center">
+   Solution for a challenge from  <a href="https://www.frontendmentor.io/" target="_blank">frontendmentor.io</a>.
+</div>
+<br>
+<br>
+<br>
 
 
 
