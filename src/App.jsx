@@ -1,14 +1,7 @@
 // import { useState } from 'react'
 
-
 function App() {
-
-
-  return (
-   <div>
-    ggggg
-   </div>
-  )
+  return <div></div>;
 }
 
-export default App
+export default App;
