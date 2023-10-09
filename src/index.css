@@ -62,8 +62,7 @@ body {
   background-color: #25273d;
   border: none;
   border-radius: 5px;
-
-  color: #537a91;
+  color: #c3c3e2;
   font-family: inherit;
   font-size: 1.8rem;
 }
@@ -79,11 +78,60 @@ body {
 }
 .Lists {
   margin-top: 2rem;
-}
-.listItems {
   background-color: #25273d;
-   color: #C8CBE7;
-   font-size: 1.9rem;
+     border-top-right-radius: 9px; 
+   border-top-left-radius: 9px; 
+}
+
+.listItems {
+  color: #c8cbe7;
+  font-size: 1.6rem;
   padding: 2rem 2rem;
-  border-bottom: 1px solid rgba(136, 136, 136, 0.7);
+  border-bottom: 1px solid rgba(151, 151, 151, 0.2);
+  display: flex;
+  gap: 9px;
+}
+.NotTodo {
+  background-color: #25273d;
+  text-align: center;
+  color: rgba(151, 151, 151, 0.6);
+  padding: 2.6rem 2rem;
+  font-size: 1.5rem;
+  border-top-right-radius: 9px;
+  border-top-left-radius: 9px;
+  border-bottom: 1px solid rgba(151, 151, 151, 0.2);
+}
+.footer {
+  background-color: #25273d;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  color: #5b5e7e;
+  border-bottom-right-radius: 9px;
+  border-bottom-left-radius: 9px;
+}
+.btn {
+  display: inline-block;
+  border: none;
+  background-color: transparent;
+  font-family: inherit;
+}
+.btn-footer {
+  font-weight: 700;
+  color: #5b5e7e;
+}
+.button-filter {
+  display: flex;
+  gap: 8px;
+}
+.btn-footer.active {
+  color: #3a7cfd;
+}
+.item-left {
+  font-size: 1.5rem;
+}
+.btn-clear {
+  color: #5b5e7e;
+  font-size: 1.5rem;
 }

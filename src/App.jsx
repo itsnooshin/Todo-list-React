@@ -1,17 +1,28 @@
 import { useState } from "react";
 
 function App() {
-  const [items , setItems] = useState([]);
-   
-  function handle(newItem){
-   setItems([...items, newItem]);
+  const [items, setItems] = useState("");
+  const [List, setList] = useState([]);
+  function handleChange(e) {
+    setItems(e.target.value);
   }
+  function handleSubmit(e) {
+    e.preventDefault();
+    setList([...List, { items: items }]);
+
+    setItems("");
+  }
+
   return (
     <>
       <Main>
         <Header />
-        <AddListInput add={items} handle={handle} />
-        <ListItems add={items}>
+        <AddListInput
+          items={items}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+        />
+        <ListItems List={List} items={items}>
           <Footer />
         </ListItems>
       </Main>
@@ -34,31 +45,37 @@ function Header() {
     </header>
   );
 }
-function AddListInput({items ,handle}) {
- 
+function AddListInput({ items, handleChange, handleSubmit }) {
   return (
-    <form action="#" className="form">
+    <form action="#" className="form" onSubmit={handleSubmit}>
       <div className="span-icon"></div>
       <input
         type="text"
         className="form__input"
         placeholder="Create a new todo…"
         value={items}
-        onChange={() => handle(items)}
+        onChange={handleChange}
       />
     </form>
   );
 }
-function ListItems({ children , items }) {
-  console.log(items);
-  
+function ListItems({ children, List, items }) {
   return (
-    <>
+    < >
       <ul className="Lists">
         {/* <li className="listItems">
           <input type="checkbox" />
+          {List}
         </li> */}
-        {items}
+        {List.length === 0 ? (
+          <li className="NotTodo"> Not to do yet </li>
+        ) : (
+          List.map((list, i) => (
+            <li className="listItems" key={i}>
+             <input type="checkbox" /> {list.items}
+            </li>
+          ))
+        )}
       </ul>
       {children}
     </>
@@ -66,8 +83,17 @@ function ListItems({ children , items }) {
 }
 
 function Footer() {
-  return <div></div>;
+  return (
+    <div className="footer">
+      <span className="item-left">X item Left</span>
+      <div className="button-filter">
+        <button className="btn btn-footer active">All</button>
+        <button className="btn btn-footer">Active</button>
+        <button className="btn btn-footer">Completed</button>
+      </div>
+      <button className="btn  btn-clear">Clear Completed</button>
+    </div>
+  );
 }
 
 export default App;
-
