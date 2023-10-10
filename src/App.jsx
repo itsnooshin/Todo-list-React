@@ -1,17 +1,64 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
   const [items, setItems] = useState("");
   const [List, setList] = useState([]);
+  const [activeRange, setActiveRange] = useState(0);
+  const [filteredList, setFilteredList] = useState("all");
+  const [activeItems, setActiveItems] = useState([]);
+
+  const updateFilter = (newFilter) => {
+    setFilteredList(newFilter);
+  };
+  function handleFilterChange(NewFilter) {
+    if (NewFilter === "complete") {
+      updateFilter(NewFilter);
+
+      // setList(List.filter((item) => item.isChecked === true));
+      console.log(List.filter((item) => item.isChecked === true));
+       // useEffect(() =>{
+  //   setActiveItems(List.filter((item) => !item.isChecked));
+  // },[filteredList , List]);
+    } else if (NewFilter === "active") {
+      updateFilter(NewFilter);
+
+      // setList(List.filter((item) => item.isChecked === false));
+    } else {
+      updateFilter(NewFilter);
+    }
+  }
+
   function handleChange(e) {
     setItems(e.target.value);
   }
   function handleSubmit(e) {
     e.preventDefault();
-    setList([...List, { items: items }]);
-
+    setList([
+      ...List,
+      {
+        items: items,
+        id: Date.now(),
+        isChecked: false,
+      },
+    ]);
     setItems("");
   }
+
+  function handleToggleItems(id) {
+    setList(
+      List.map((item) =>
+        item.id === id ? { ...item, isChecked: !item.isChecked } : item
+      )
+    );
+  }
+
+  const itemChecked = List.filter((item) => item.isChecked).length;
+  const itemtotal = List.length;
+  const totalCalcuate = itemtotal - itemChecked;
+
+  // useEffect(() =>{
+  //   setActiveItems(List.filter((item) => !item.isChecked));
+  // },[filteredList , List]);
 
   return (
     <>
@@ -22,8 +69,19 @@ function App() {
           handleChange={handleChange}
           handleSubmit={handleSubmit}
         />
-        <ListItems List={List} items={items}>
-          <Footer />
+        <ListItems
+          List={List}
+          items={items}
+          handleToggleItems={handleToggleItems}
+        >
+          <Footer
+            items={List}
+            itemChecked={totalCalcuate}
+            activeRange={activeRange}
+            setActiveRange={setActiveRange}
+            List={List}
+            handleFilterChange={handleFilterChange}
+          />
         </ListItems>
       </Main>
     </>
@@ -59,40 +117,58 @@ function AddListInput({ items, handleChange, handleSubmit }) {
     </form>
   );
 }
-function ListItems({ children, List, items }) {
+
+function Footer({ itemChecked, handleFilterChange }) {
   return (
-    < >
+    <div className="footer">
+      <span className="item-left">{itemChecked} item Left</span>
+      <div className="button-filter">
+        <button
+          className="btn btn-footer"
+          onClick={() => handleFilterChange("all")}
+        >
+          All
+        </button>
+        <button
+          className="btn btn-footer"
+          onClick={() => handleFilterChange("active")}
+        >
+          Active{" "}
+        </button>
+        <button
+          className="btn btn-footer"
+          onClick={() => handleFilterChange("complete")}
+        >
+          Compeleted
+        </button>
+      </div>
+      <button className="btn btn-clear">Clear Completed</button>
+    </div>
+  );
+}
+
+function ListItems({ children, List, handleToggleItems }) {
+  return (
+    <>
       <ul className="Lists">
-        {/* <li className="listItems">
-          <input type="checkbox" />
-          {List}
-        </li> */}
         {List.length === 0 ? (
-          <li className="NotTodo"> Not to do yet </li>
+          <p className="NotTodo"> Not to do yet </p>
         ) : (
           List.map((list, i) => (
             <li className="listItems" key={i}>
-             <input type="checkbox" /> {list.items}
+              <div className="inputs" id={i}>
+                <input
+                  type="checkbox"
+                  onChange={() => handleToggleItems(list.id)}
+                />
+                <p className={list.isChecked ? "checked" : ""}>{list.items}</p>
+              </div>
             </li>
           ))
         )}
       </ul>
       {children}
     </>
-  );
-}
-
-function Footer() {
-  return (
-    <div className="footer">
-      <span className="item-left">X item Left</span>
-      <div className="button-filter">
-        <button className="btn btn-footer active">All</button>
-        <button className="btn btn-footer">Active</button>
-        <button className="btn btn-footer">Completed</button>
-      </div>
-      <button className="btn  btn-clear">Clear Completed</button>
-    </div>
   );
 }
 
