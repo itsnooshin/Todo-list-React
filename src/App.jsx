@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 function App() {
   const [List, setList] = useState([]);
   const [activeItems, setActiveItems] = useState([]);
-  const [activeRange, setActiveRange] = useState(0);
   const [filteredList, setFilteredList] = useState("all");
   const [items, setItems] = useState("");
 
@@ -58,6 +57,10 @@ function App() {
     setList(List.filter((item) => !item.isChecked));
   }
 
+  function removeList(id) {
+    setList(List.filter((item) => item.id !== id));
+  }
+
   return (
     <>
       <Main>
@@ -73,14 +76,10 @@ function App() {
           handleToggleItems={handleToggleItems}
           filteredList={filteredList}
           activeItems={activeItems}
-          // filteredTasks={filteredTasks}
+          removeList={removeList}
         >
           <Footer
-            items={List}
             itemChecked={totalCalcuate}
-            activeRange={activeRange}
-            setActiveRange={setActiveRange}
-            List={List}
             remove={removeItemesCompleted}
             setFilter={setFilteredList}
           />
@@ -120,6 +119,54 @@ function AddListInput({ items, handleChange, handleSubmit }) {
   );
 }
 
+
+
+function ListItems({
+  removeList,
+  children,
+  handleToggleItems,
+  filteredList,
+  activeItems,
+}) {
+  return (
+    <>
+      <ul className="Lists">
+        {activeItems.length === 0 ? (
+          filteredList === "active" ? (
+            <p className="NotTodo ">No active todo</p>
+          ) : filteredList === "complete" ? (
+            <p className="NotTodo ">No completed todo</p>
+          ) : (
+            <p className="NotTodo ">No todo yet </p>
+          )
+        ) : (
+          activeItems.map((list, i) => (
+            <li className="listItems" key={i}>
+              <div className="inputs" id={i}>
+                <input
+                  type="checkbox"
+                  onChange={() => handleToggleItems(list.id)}
+                  checked={list.isChecked}
+                />
+
+                <p className={list.isChecked ? "checked" : ""}>{list.items}</p>
+                <img
+                  src="/src\assets\icon-cross.svg"
+                  alt={list.id}
+                  className="icon-remove"
+                  role="button"
+                  onClick={() => removeList(list.id)}
+                />
+              </div>
+            </li>
+          ))
+        )}
+      </ul>
+
+      {children}
+    </>
+  );
+}
 function Footer({ itemChecked, remove, setFilter }) {
   return (
     <div className="footer">
@@ -144,39 +191,4 @@ function Footer({ itemChecked, remove, setFilter }) {
     </div>
   );
 }
-
-function ListItems({ children, handleToggleItems, filteredList, activeItems }) {
-  return (
-    <>
-      <ul className="Lists">
-        {activeItems.length === 0 ? (
-          filteredList === "active" ? (
-            <p className="NotTodo ">No active todo</p>
-          ) : filteredList === "complete" ? (
-            <p className="NotTodo ">No completed todo</p>
-          ) : (
-            <p className="NotTodo ">No todo yet </p>
-          )
-        ) : (
-          activeItems.map((list, i) => (
-            <li className="listItems" key={i}>
-              <div className="inputs" id={i}>
-                <input
-                  type="checkbox"
-                  onChange={() => handleToggleItems(list.id)}
-                  checked={list.isChecked}
-                />
-                 <img src="src\assets\" alt="" />
-                <p className={list.isChecked ? "checked" : ""}>{list.items}</p>
-              </div>
-            </li>
-          ))
-        )}
-      </ul>
-
-      {children}
-    </>
-  );
-}
-
 export default App;
