@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 function App() {
   const [List, setList] = useState([]);
   const [activeItems, setActiveItems] = useState([]);
+  // const [toggledarkmode, setToggledarkmode] = useState("dark");
   const [filteredList, setFilteredList] = useState("all");
   const [items, setItems] = useState("");
 
@@ -82,6 +83,7 @@ function App() {
             itemChecked={totalCalcuate}
             remove={removeItemesCompleted}
             setFilter={setFilteredList}
+            filteredList={filteredList}
           />
         </ListItems>
       </Main>
@@ -118,8 +120,6 @@ function AddListInput({ items, handleChange, handleSubmit }) {
     </form>
   );
 }
-
-
 
 function ListItems({
   removeList,
@@ -167,19 +167,27 @@ function ListItems({
     </>
   );
 }
-function Footer({ itemChecked, remove, setFilter }) {
+function Footer({ itemChecked, remove, setFilter, filteredList }) {
   return (
     <div className="footer">
       <span className="item-left">{itemChecked} item Left</span>
       <div className="button-filter">
-        <button className="btn btn-footer" onClick={() => setFilter("all")}>
+        <button
+          className={`btn btn-footer ${filteredList === "all" ? "active" : ""}`}
+          onClick={() => setFilter("all")}
+        >
           All
         </button>
-        <button className="btn btn-footer" onClick={() => setFilter("active")}>
+        <button
+          className={`btn btn-footer ${
+            filteredList === "active" ? "active" : ""
+          }`}
+          onClick={() => setFilter("active")}
+        >
           Active{" "}
         </button>
         <button
-          className="btn btn-footer"
+          className={`btn btn-footer ${filteredList === "complete" ? "active" : ""}`}
           onClick={() => setFilter("complete")}
         >
           Compeleted
