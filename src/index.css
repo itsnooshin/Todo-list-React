@@ -213,11 +213,10 @@ input[type="checkbox"]:checked::before {
     background-size: contain;
   }
   .container {
-    max-width: 45rem;
+    max-width: 42rem;
     margin: 0 auto;
   }
   .header {
-   padding-top: 7rem;
+    padding-top: 7rem;
   }
- 
 }
