@@ -198,15 +198,19 @@ input[type="checkbox"]:checked::before {
 
 /* responsive  */
 
-@media (max-width : 1600px){
+@media (min-width : 1400px){
   .main-content {
   background-color: #171823;
   background-image: url("./assets/bg-desktop-dark.jpg");
-  height: 100vh;
+  height: 50vh;
   width: 100%;
-  background-repeat: no-repeat;
-  margin-bottom: 20rem;
+  margin-bottom: 30rem;
+  background-size: cover;
 }
+.header {
+  padding-top: 7rem;
+}
+
 }
 
 

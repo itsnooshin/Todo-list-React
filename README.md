@@ -12,7 +12,7 @@
       Solution
     </a>
    <span> | </span>
-    <a href="https://www.frontendmentor.io/challenges/todo-app-Su1_KokOW">
+    <a href="https://www.frontendmentor.io/challenges/todo-app-Su1_KokOW" >
       Challenge
     </a>
   </h3>
