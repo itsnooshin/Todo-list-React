@@ -1,9 +1,14 @@
 import { useEffect, useState } from "react";
 
+import Header from "./components/Header";
+import AddListInput from "./components/AddListInput";
+import Main from "./components/Main";
+import Footer from "./components/Footer";
+// import ListItems from "./components/ListItems";
+
 function App() {
   const [List, setList] = useState([]);
   const [activeItems, setActiveItems] = useState([]);
-  // const [toggledarkmode, setToggledarkmode] = useState("dark");
   const [filteredList, setFilteredList] = useState("all");
   const [items, setItems] = useState("");
 
@@ -17,7 +22,6 @@ function App() {
         items: items,
         id: Date.now(),
         isChecked: false,
-        active: true,
       };
       setList([...List, newItem]);
 
@@ -29,23 +33,20 @@ function App() {
   useEffect(() => {
     const filteredTasks = () => {
       if (filteredList === "active") {
-        return List.filter((item) => !item.isChecked);
+        return List.filter((item) => !item.isChecked); // not complete false
       } else if (filteredList === "complete") {
-        return List.filter((item) => item.isChecked);
+        return List.filter((item) => item.isChecked); // true
       } else {
         return List;
       }
     };
-
     setActiveItems(filteredTasks());
   }, [List, filteredList]);
 
   function handleToggleItems(id) {
     setList(
       List.map((item) =>
-        item.id === id
-          ? { ...item, isChecked: !item.isChecked, active: !item.active }
-          : item
+        item.id === id ? { ...item, isChecked: !item.isChecked } : item
       )
     );
   }
@@ -78,52 +79,17 @@ function App() {
           filteredList={filteredList}
           activeItems={activeItems}
           removeList={removeList}
+         
         >
           <Footer
-            itemChecked={totalCalcuate}
             remove={removeItemesCompleted}
             setFilter={setFilteredList}
             filteredList={filteredList}
+            itemChecked={totalCalcuate}
           />
         </ListItems>
       </Main>
     </>
-  );
-}
-function Main({ children }) {
-  return (
-    <div className="main-content">
-      <div className="container">{children}</div>
-    </div>
-  );
-}
-
-function Header() {
-  return (
-    <header className="header">
-      <h1>TODO</h1>
-      <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26">
-        <path
-          fill="#FFF"
-          fill-rule="evenodd"
-          d="M13 21a1 1 0 011 1v3a1 1 0 11-2 0v-3a1 1 0 011-1zm-5.657-2.343a1 1 0 010 1.414l-2.121 2.121a1 1 0 01-1.414-1.414l2.12-2.121a1 1 0 011.415 0zm12.728 0l2.121 2.121a1 1 0 01-1.414 1.414l-2.121-2.12a1 1 0 011.414-1.415zM13 8a5 5 0 110 10 5 5 0 010-10zm12 4a1 1 0 110 2h-3a1 1 0 110-2h3zM4 12a1 1 0 110 2H1a1 1 0 110-2h3zm18.192-8.192a1 1 0 010 1.414l-2.12 2.121a1 1 0 01-1.415-1.414l2.121-2.121a1 1 0 011.414 0zm-16.97 0l2.121 2.12A1 1 0 015.93 7.344L3.808 5.222a1 1 0 011.414-1.414zM13 0a1 1 0 011 1v3a1 1 0 11-2 0V1a1 1 0 011-1z"
-        />
-      </svg>
-    </header>
-  );
-}
-function AddListInput({ items, handleChange, handleSubmit }) {
-  return (
-    <form action="#" className="form" onSubmit={handleSubmit}>
-      <div className="span-icon"></div>
-      <input
-        type="text"
-        className="form__input"
-        placeholder="Create a new todo…"
-        value={items}
-        onChange={handleChange}
-      />
-    </form>
   );
 }
 
@@ -156,13 +122,6 @@ function ListItems({
                 />
 
                 <p className={list.isChecked ? "checked" : ""}>{list.items}</p>
-                {/* <img
-                  src="/src\assets\icon-cross.svg"
-                  alt={list.id}
-                  className="icon-remove"
-                  role="button"
-                  onClick={() => removeList(list.id)}
-                /> */}
                 <span
                   className="icon-remove"
                   onClick={() => removeList(list.id)}
@@ -175,7 +134,6 @@ function ListItems({
                   >
                     <path
                       fill="#494C6B"
-                      fill-rule="evenodd"
                       d="M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z"
                     />
                   </svg>
@@ -188,40 +146,6 @@ function ListItems({
 
       {children}
     </>
-  );
-}
-function Footer({ itemChecked, remove, setFilter, filteredList }) {
-  return (
-    <div className="footer">
-      <span className="item-left">{itemChecked} item Left</span>
-      <div className="button-filter">
-        <button
-          className={`btn btn-footer ${filteredList === "all" ? "active" : ""}`}
-          onClick={() => setFilter("all")}
-        >
-          All
-        </button>
-        <button
-          className={`btn btn-footer ${
-            filteredList === "active" ? "active" : ""
-          }`}
-          onClick={() => setFilter("active")}
-        >
-          Active{" "}
-        </button>
-        <button
-          className={`btn btn-footer ${
-            filteredList === "complete" ? "active" : ""
-          }`}
-          onClick={() => setFilter("complete")}
-        >
-          Compeleted
-        </button>
-      </div>
-      <button className="btn btn-clear" onClick={remove}>
-        Clear Completed
-      </button>
-    </div>
   );
 }
 export default App;
