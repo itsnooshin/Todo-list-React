@@ -12,16 +12,7 @@ function App() {
   const [filteredList, setFilteredList] = useState("all");
   const [items, setItems] = useState("");
 
-  const [List, setList] = useLocalstorage([]);
-
-  // const [List, setList] = useState(function () {
-  //   let storeData = localStorage.getItem("List");
-  //   return storeData ? JSON.parse(storeData) : [];
-  // });
-
-  // useEffect(() => {
-  //   localStorage.setItem("List", JSON.stringify(List));
-  // }, [List]);
+  const [List, setList] = useLocalstorage([], "list");
 
   function handleChange(e) {
     setItems(e.target.value);
