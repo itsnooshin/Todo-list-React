@@ -4,13 +4,24 @@ import Header from "./components/Header";
 import AddListInput from "./components/AddListInput";
 import Main from "./components/Main";
 import Footer from "./components/Footer";
-// import ListItems from "./components/ListItems";
+import useLocalstorage from "./useLocalstorage";
+import { HiPencil, HiTrash } from "react-icons/hi";
 
 function App() {
-  const [List, setList] = useState([]);
   const [activeItems, setActiveItems] = useState([]);
   const [filteredList, setFilteredList] = useState("all");
   const [items, setItems] = useState("");
+
+  const [List, setList] = useLocalstorage([]);
+
+  // const [List, setList] = useState(function () {
+  //   let storeData = localStorage.getItem("List");
+  //   return storeData ? JSON.parse(storeData) : [];
+  // });
+
+  // useEffect(() => {
+  //   localStorage.setItem("List", JSON.stringify(List));
+  // }, [List]);
 
   function handleChange(e) {
     setItems(e.target.value);
@@ -24,9 +35,7 @@ function App() {
         isChecked: false,
       };
       setList([...List, newItem]);
-
       setActiveItems([...List, newItem]);
-
       setItems("");
     }
   }
@@ -79,7 +88,6 @@ function App() {
           filteredList={filteredList}
           activeItems={activeItems}
           removeList={removeList}
-         
         >
           <Footer
             remove={removeItemesCompleted}
@@ -127,16 +135,8 @@ function ListItems({
                   onClick={() => removeList(list.id)}
                   role="button"
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="18"
-                    height="18"
-                  >
-                    <path
-                      fill="#494C6B"
-                      d="M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z"
-                    />
-                  </svg>
+                  <HiTrash size={20} />
+                  <HiPencil size={20} />
                 </span>
               </div>
             </li>
