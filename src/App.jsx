@@ -12,7 +12,7 @@ function App() {
   const [filteredList, setFilteredList] = useState("all");
   const [items, setItems] = useState("");
 
-  const [List, setList] = useLocalstorage([], "list");
+  const [List, setList] = useLocalstorage([], "List");
 
   function handleChange(e) {
     setItems(e.target.value);
