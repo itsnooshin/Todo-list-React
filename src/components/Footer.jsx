@@ -1,4 +1,4 @@
-import React from 'react'
+
 
 export default function Footer({itemChecked , setFilter , filteredList , remove}) {
   return (

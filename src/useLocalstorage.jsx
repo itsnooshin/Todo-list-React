@@ -11,6 +11,6 @@ export default function useLocalstorage(initialValue , list) {
   }, [value , list]);
 
 
-  return [value , setValue]
+  return [value , setValue];
 
 }
