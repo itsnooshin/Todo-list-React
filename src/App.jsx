@@ -5,14 +5,16 @@ import AddListInput from "./components/AddListInput";
 import Main from "./components/Main";
 import Footer from "./components/Footer";
 import useLocalstorage from "./useLocalstorage";
-import { HiPencil, HiTrash } from "react-icons/hi";
+import { ListItems } from "./components/ListItems";
+// import { HiArrowPath } from "react-icons/hi2";
 
 function App() {
   const [activeItems, setActiveItems] = useState([]);
   const [filteredList, setFilteredList] = useState("all");
   const [items, setItems] = useState("");
-
   const [List, setList] = useLocalstorage([], "List");
+  const [editingItem, setEditingItem] = useState("");
+  const [selectedId, setSelectedId] = useState(null);
 
   function handleChange(e) {
     setItems(e.target.value);
@@ -63,6 +65,16 @@ function App() {
     setList(List.filter((item) => item.id !== id));
   }
 
+  function handleEditList(id) {
+    setList(
+      List.map((item) =>
+        item.id === id ? { ...item, items: editingItem } : item
+      )
+    );
+    setSelectedId(null);
+    setEditingItem("");
+  }
+
   return (
     <>
       <Main>
@@ -79,6 +91,14 @@ function App() {
           filteredList={filteredList}
           activeItems={activeItems}
           removeList={removeList}
+          setItems={setItems}
+          setList={setList}
+          // ListChange={handleEditListChange}
+          handleEditList={handleEditList}
+          setEditingItem={setEditingItem}
+          editingItem={editingItem}
+          selectedId={selectedId}
+          setSelectedId={setSelectedId}
         >
           <Footer
             remove={removeItemesCompleted}
@@ -92,51 +112,4 @@ function App() {
   );
 }
 
-function ListItems({
-  removeList,
-  children,
-  handleToggleItems,
-  filteredList,
-  activeItems,
-}) {
-  return (
-    <>
-      <ul className="Lists">
-        {activeItems.length === 0 ? (
-          filteredList === "active" ? (
-            <p className="NotTodo ">No active todo</p>
-          ) : filteredList === "complete" ? (
-            <p className="NotTodo ">No completed todo</p>
-          ) : (
-            <p className="NotTodo ">No todo yet </p>
-          )
-        ) : (
-          activeItems.map((list, i) => (
-            <li className="listItems" key={i}>
-              <div className="inputs" id={i}>
-                <input
-                  type="checkbox"
-                  onChange={() => handleToggleItems(list.id)}
-                  checked={list.isChecked}
-                />
-
-                <p className={list.isChecked ? "checked" : ""}>{list.items}</p>
-                <span
-                  className="icon-remove"
-                  onClick={() => removeList(list.id)}
-                  role="button"
-                >
-                  <HiTrash size={20} />
-                  <HiPencil size={20} />
-                </span>
-              </div>
-            </li>
-          ))
-        )}
-      </ul>
-
-      {children}
-    </>
-  );
-}
 export default App;

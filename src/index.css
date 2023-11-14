@@ -90,9 +90,9 @@ body {
   font-size: 1.6rem;
   padding: 2rem 2rem;
   border-bottom: 1px solid rgba(151, 151, 151, 0.2);
-  display: flex;
+  /* display: flex; */
   gap: 9px;
-  align-items: center;
+  /* align-items: center; */
   position: relative;
 }
 .listItems p {
@@ -102,6 +102,7 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
+  /* flex-direction: column; */
 }
 .NotTodo {
   background-color: #25273d;
@@ -195,6 +196,51 @@ input[type="checkbox"]:checked::before {
   align-items: center;
   gap: 10px;
 }
+.icon-edit,
+.icon-update {
+  position: absolute;
+  right: 50px;
+  cursor: pointer;
+  display: block;
+  display: flex;
+  align-items: center;
+  /* gap: 10px; */
+  border: none;
+  /* background-color: black; */
+  /* color: white; */
+  font-family: inherit;
+  border: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: 6px;
+}
+.input-edit {
+  border: none;
+  background-color: transparent;
+  color: #fff;
+  font-family: inherit;
+  padding: 0.6rem 1rem;
+  border: 1px solid #5b5e7e;
+  border-radius: 6px;
+  width: 350px;
+  font-size: 1.6rem;
+}
+.input-edit:focus {
+  outline: 2px solid #5b5e7e;
+  cursor: pointer;
+}
+button {
+  background-color: transparent;
+  /* color: #393a4b; */
+}
+.date-list {
+  /* background-color: red;
+  width: 100%; */
+  /* padding-left: 1.4rem;
+  padding-top: 2rem; */
+  display: block;
+  margin-top: 1rem;
+  color: #4d5067;
+}
 .edit-task {
   border-radius: 10px;
   color: white;
@@ -203,11 +249,10 @@ input[type="checkbox"]:checked::before {
   padding: 0.6rem 1.5rem;
 }
 
-.edit-task{
-  background-image: linear-gradient(45deg, #5778FF, #C058F3);
+.edit-task {
+  background-image: linear-gradient(45deg, #5778ff, #c058f3);
   cursor: pointer;
 }
-
 
 /* responsive  */
 

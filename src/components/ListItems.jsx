@@ -1,14 +1,30 @@
+// import { useState } from "react";
+import { HiPencil, HiTrash, HiOutlineCheck } from "react-icons/hi";
+
+const date = new Date();
+
+const newDtae = date.toLocaleTimeString();
+// const Date1 = newDtae.split(" ")[0].slice(0, -3);
+const hourAndSecond = `${date.getHours()}: ${date.getMinutes()}   ${
+  date.getHours() > 12 ? "PM" : "AM"
+}`;
+
+const fullDay = `${date.getFullYear()}/${date.getMonth()}/${date.getDate()}`;
 
 
-export default function ListItems(
-  List,
-  items,
+export function ListItems({
+  removeList,
+  children,
   handleToggleItems,
   filteredList,
   activeItems,
-  removeList , 
-  children
-) {
+  setEditingItem,
+  handleEditList,
+  editingItem,
+  setList,
+  selectedId,
+  setSelectedId,
+}) {
   return (
     <>
       <ul className="Lists">
@@ -22,33 +38,63 @@ export default function ListItems(
           )
         ) : (
           activeItems.map((list, i) => (
-            <li className="listItems" key={i}>
-              <div className="inputs" id={i}>
-                <input
-                  type="checkbox"
-                  onChange={() => handleToggleItems(list.id)}
-                  checked={list.isChecked}
-                />
+            <>
+              <li className="listItems" key={i}>
+                <div className="inputs" id={i}>
+                  <input
+                    type="checkbox"
+                    onChange={() => handleToggleItems(list.id)}
+                    checked={list.isChecked}
+                  />
 
-                <p className={list.isChecked ? "checked" : ""}>{list.items}</p>
-                <span
-                  className="icon-remove"
-                  onClick={() => removeList(list.id)}
-                  role="button"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="18"
-                    height="18"
+                  <span
+                    className="icon-remove"
+                    onClick={() => removeList(list.id)}
+                    role="button"
                   >
-                    <path
-                      fill="#494C6B"
-                      d="M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z"
-                    />
-                  </svg>
-                </span>
-              </div>
-            </li>
+                    <HiTrash size={20} />
+                  </span>
+
+                  {selectedId === list.id ? (
+                    <>
+                      <input
+                        className="input-edit"
+                        type="text"
+                        value={editingItem}
+                        onChange={(e) => setEditingItem(e.target.value)}
+                      />
+                      <span className="icon-edit" role="button">
+                        <HiOutlineCheck
+                          size={20}
+                          onClick={() => handleEditList(list.id)}
+                        />
+                      </span>
+                      {/* {editingItem} */}
+                    </>
+                  ) : (
+                    <>
+                      <p className={list.isChecked ? "checked" : ""}>
+                        {list.items}
+                      </p>
+                      <span
+                        role="button"
+                        className="icon-edit"
+                        onClick={() => {
+                          setSelectedId(list.id);
+                          setEditingItem(list.items);
+                        }}
+                      >
+                        <HiPencil size={20} />
+                      </span>
+                    </>
+                  )}
+                </div>
+
+                <div>
+                  <span className="date-list">{hourAndSecond} - {fullDay}</span>
+                </div>
+              </li>
+            </>
           ))
         )}
       </ul>
@@ -57,4 +103,3 @@ export default function ListItems(
     </>
   );
 }
-
