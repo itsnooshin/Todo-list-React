@@ -2,17 +2,15 @@
 import { HiPencil, HiTrash, HiOutlineCheck } from "react-icons/hi";
 
 const date = new Date();
-
 const newDtae = date.toLocaleTimeString();
-// const Date1 = newDtae.split(" ")[0].slice(0, -3);
+
 const hourAndSecond = `${date.getHours()}: ${date.getMinutes()}   ${
   date.getHours() > 12 ? "PM" : "AM"
 }`;
 
 const fullDay = `${date.getFullYear()}/${date.getMonth()}/${date.getDate()}`;
 
-
-export function ListItems({
+export function TodoList({
   removeList,
   children,
   handleToggleItems,
@@ -21,9 +19,9 @@ export function ListItems({
   setEditingItem,
   handleEditList,
   editingItem,
-  setList,
   selectedId,
   setSelectedId,
+ 
 }) {
   return (
     <>
@@ -47,12 +45,14 @@ export function ListItems({
                     checked={list.isChecked}
                   />
 
-                  <span
-                    className="icon-remove"
-                    onClick={() => removeList(list.id)}
-                    role="button"
-                  >
-                    <HiTrash size={20} />
+                  <span className="icon-remove" role="button">
+                    <HiTrash
+                      size={20}
+                      onClick={() => {
+                        removeList(list.id);
+                        // handleDelete();
+                      }}
+                    />
                   </span>
 
                   {selectedId === list.id ? (
@@ -66,10 +66,11 @@ export function ListItems({
                       <span className="icon-edit" role="button">
                         <HiOutlineCheck
                           size={20}
-                          onClick={() => handleEditList(list.id)}
+                          onClick={() => {
+                            handleEditList(list.id);
+                          }}
                         />
                       </span>
-                      {/* {editingItem} */}
                     </>
                   ) : (
                     <>
@@ -91,7 +92,9 @@ export function ListItems({
                 </div>
 
                 <div>
-                  <span className="date-list">{hourAndSecond} - {fullDay}</span>
+                  <span className="date-list">
+                    {hourAndSecond} - {fullDay}
+                  </span>
                 </div>
               </li>
             </>
