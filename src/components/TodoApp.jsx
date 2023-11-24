@@ -7,8 +7,9 @@ import useLocalstorage from "../useLocalstorage";
 import { TodoList } from "./TodoList";
 import TodoForm from "./TodoForm";
 
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+// import { ToastContainer, toast } from "react-toastify";
+// import "react-toastify/dist/ReactToastify.css";
+import { Toaster, toast } from "sonner";
 
 function TodoApp() {
   const [activeItems, setActiveItems] = useState([]);
@@ -20,17 +21,8 @@ function TodoApp() {
   const notify = () => {
     toast.success("Task added succesfully ", {
       position: "top-center",
-      autoClose: 1300,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-      limit: 1,
-
       style: {
-        fontSize: "20px",
+        fontSize: "15px",
         padding: "20px",
       },
     });
@@ -84,17 +76,12 @@ function TodoApp() {
   }
 
   const notifyDelete = () => {
-    toast.error("Item deleted successfully", {
+    toast("💢 Item deleted successfully", {
       position: "top-center",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
       theme: "light",
+
       style: {
-        fontSize: "19px",
+        fontSize: "15px",
         padding: "20px",
       },
     });
@@ -103,16 +90,10 @@ function TodoApp() {
     toast.success("Task Updated succesfully ", {
       position: "top-center",
       autoClose: 1300,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
       theme: "light",
-      limit: 1,
 
       style: {
-        fontSize: "19px",
+        fontSize: "15px",
         padding: "20px",
       },
     });
@@ -121,15 +102,9 @@ function TodoApp() {
   const notifyValidTask = () => {
     toast.error("Please select a valid item", {
       position: "top-center",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
+
       style: {
-        fontSize: "19px",
+        fontSize: "15px",
         padding: "20px",
       },
     });
@@ -193,8 +168,7 @@ function TodoApp() {
           />
         </TodoList>
       </Main>
-
-      <ToastContainer limit={1} />
+      <Toaster richColors   limit = {1}/>
     </>
   );
 }

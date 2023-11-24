@@ -44,6 +44,7 @@ The Todo App Challenge is an interactive web application designed to help users 
 - HTML
 - CSS / SCSS styles
 - React - Front-end JavaScript library
+- React-sonner-libraray for show Notifaction 
 
 ## Usage
 

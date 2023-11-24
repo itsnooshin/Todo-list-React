@@ -34,3 +34,5 @@ export default function Footer({itemChecked , setFilter , filteredList , remove}
     </div>
   );
 }
+
+

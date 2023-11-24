@@ -15,5 +15,4 @@ function TodoForm({ items, handleChange, handleSubmit, notify }) {
     </div>
   );
 }
-
 export default TodoForm;
