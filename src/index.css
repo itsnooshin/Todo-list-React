@@ -121,6 +121,7 @@ body {
   border-bottom-left-radius: 9px;
 }
 .btn {
+  cursor: pointer;
   display: inline-block;
   border: none;
   background-color: transparent;
@@ -262,7 +263,6 @@ button {
   color: #c3c3e2;
   cursor: pointer;
  }
-
 
 /* responsive  */
 
