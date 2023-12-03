@@ -7,8 +7,6 @@ import useLocalstorage from "../useLocalstorage";
 import { TodoList } from "./TodoList";
 import TodoForm from "./TodoForm";
 
-// import { ToastContainer, toast } from "react-toastify";
-// import "react-toastify/dist/ReactToastify.css";
 import { Toaster, toast } from "sonner";
 
 function TodoApp() {

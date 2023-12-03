@@ -1,4 +1,4 @@
-function TodoForm({ items, handleChange, handleSubmit, notify }) {
+function TodoForm({ items, handleChange, handleSubmit, }) {
   return (
     <div className="form-header">
       <form action="#" className="form" onSubmit={handleSubmit}>
@@ -11,7 +11,6 @@ function TodoForm({ items, handleChange, handleSubmit, notify }) {
           onChange={handleChange}
         />
       </form>
-      <button onClick={notify}>Add</button>
     </div>
   );
 }
